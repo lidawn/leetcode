@@ -8,6 +8,7 @@
  */
 class Solution {
 public:
+/*
     ListNode* reverseList(ListNode* head) {
         if(head==NULL || head->next==NULL)return head;
         ListNode *tmp,*phead = head;
@@ -20,4 +21,23 @@ public:
         }
         return phead;
     }
+*/ 
+    //递归
+  
+    void reverse(ListNode* &p)
+    {
+        if(!p)return;
+        ListNode *rest = p->next;
+        if(!rest)return;
+        reverse(rest);
+        p->next->next = p;
+        p->next = NULL;
+        p =rest;
+    }
+    ListNode* reverseList(ListNode* head) {
+        reverse(head);
+        return head;
+    }
+    
+    
 };

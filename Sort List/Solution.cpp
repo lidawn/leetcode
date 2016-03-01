@@ -40,7 +40,7 @@ public:
     ListNode* sortList(ListNode* head) {
         if(head==NULL||head->next==NULL)return head;
         ListNode *slow=head,*fast=head;
-        while(fast!=NULL&&fast->next!=NULL)
+        while(fast->next!=NULL&&fast->next->next!=NULL)
         {
             fast = fast->next->next;
             slow = slow->next;

@@ -9,7 +9,15 @@
  */
 class Solution {
 public:
+    bool isSymmetric_s(TreeNode *left, TreeNode *right)
+    {
+        if(left==NULL&&right==NULL)return true;
+        else if(left&&right&&left->val==right->val)
+            return isSymmetric_s(left->right,right->left)&&isSymmetric_s(left->left,right->right);
+        else return false;
+    }
     bool isSymmetric(TreeNode* root) {
+        /*
         queue<TreeNode*> qu;
         TreeNode *tmp;
         if(root)qu.push(root);
@@ -48,6 +56,13 @@ public:
             delete []vals;
         }
         return true;
+        */
+        //递归版
+        //a的左子树的左子树和a的右子树的右子树对称
+        //a的左子树的右子树和a的右子树的左子树对称
+        //递归的4ms
+        if(root==NULL)return true;
+        return isSymmetric_s(root->left,root->right);
     }
    
 };

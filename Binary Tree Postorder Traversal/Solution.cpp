@@ -35,42 +35,23 @@ public:
         vector<int> ret;
         stack<TreeNode*> st;
         TreeNode *tmp;
-        bool flag = false;
-        if(root)
-        {
-            st.push(root);
-            //是否入栈
-            if(root->left||root->right)flag=true;
-        }
-        
+        TreeNode *pre=NULL;
+        if(root)st.push(root);
         while(!st.empty())
         {
-            //入栈
             tmp = st.top();
-            if(flag)
+            if((tmp->left==NULL&&tmp->right==NULL)||(pre!=NULL&&(pre==tmp->left||pre==tmp->right)))
             {
-                if(tmp->right&&flag)
-                {
-                    st.push(tmp->right);
-                    flag = true;
-                }
-                if(tmp->left&&flag)
-                {
-                    st.push(tmp->left);
-                    flag = true;
-                }
-                if(tmp->left==NULL&&tmp->right==NULL)
-                {
-                    ret.push_back(tmp->val);
-                    st.pop();
-     
-                }
+                ret.push_back(tmp->val);
+                st.pop();
+                pre = tmp;
             }
             else
             {
-                ret.push_back(tmp->val);
-                    st.pop();
-                    flag = false;
+                if(tmp->right)
+                    st.push(tmp->right);
+                if(tmp->left)
+                    st.push(tmp->left);
             }
         }
         return ret;
